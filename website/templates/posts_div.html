@@ -3,4 +3,35 @@
 {% block title %}{% endblock %}
 
 {% block content %}
+</br>
+<div id="posts">
+    {% for post in posts %}
+        <div class="card border-dark mb-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <a href="posts/{{post.user.username}}">{{post.user.username}}</a>
+                {% if user.id == post.author %}
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-sm btn-secondary dropdown-toggle" data-bs-toggle="dropdown"></button>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                        <li><a class="dropdown-item" href="/delete-post/{{post.id}}">Delete</a></li>
+                        </ul>
+                    </div>  
+                {% endif %}
+            </div>  
+            <div class="card-body">
+                <div class="card-text">{{post.text}}</div>
+            </div>
+            <div class="card-footer text-muted">
+                {{post.date_created}}
+            </div>
+        </div>
+    </br>
+    {% endfor%}
+</div>
+{% block footer%}
+<div align="center">
+    <a href="/create-post"><button type="button" class="btn btn-lg btn-secondary" style="background-color:#008B8B">Create a Post</button></a>
+</div>
+{% endblock %}
+
 {% endblock %}
